@@ -2,6 +2,49 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+# BookSpace
+
+## Deskripsi Proyek
+Sistem bookSpace sederhana ini untuk menampilkan daftar buku dan detail buku.
+
+Fitur-fitur:
+- Halaman registrasi dan login menggunakan mockapi.io.
+- Halaman dashboard daftar buku menggunakan mockapi.io.
+- Pencarian buku berdasarkan judul buku.
+- Filter kategori berdasarkan kategori buku.
+- Halaman detail buku dan halaman favorite.
+- Menampilkan daftar buku yang telah di pilih user sebagai buku favorite.
+- Menambahkan buku ke favorit dan tersimpan pada local storage.
+- Menerapkan tema terang dan gelap.
+- Responsive desain berbagai device laptop, tablet, dan hp.
+
+## Alat Pengembangan
+- **Framework** : Next.js 15.5.2
+- **Language**  : TypeScript
+- **State Management**: Redux Toolkit
+- **Font**: Geist / Geist Mono (Google Fonts)
+- **Theme Management**: `next-themes`
+- **Styling**: Tailwind CSS
+- **Storage**: localStorage (pada fitur favorit buku)
+
+## Hal-hal apa saja yang dikembangkan
+- Authentikasi register login menggunakan JWT
+- Dashboard daftar buku
+- Pencarian buku
+- Pengkategorian buku
+- Halaman detail buku 
+- Tombol tambahkan ke favorite
+- Halaman favorit buku
+- Tema terang dan gelap
+- Responsive design
+
+## Cara menjalankan di lokal 
+- **Clone repository**  
+```bash
+git clone https://github.com/Priananda/BookSpace.git
+
+
+
 First, run the development server:
 
 ```bash
@@ -34,3 +77,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+

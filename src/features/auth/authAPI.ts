@@ -1,17 +1,35 @@
 import api from '../../lib/API'; // sesuaikan pathnya
 
-interface RegisterPayload {
+// payload untuk register
+export interface RegisterPayload {
   username: string;
   email: string;
   password: string;
 }
 
+// payload untuk login
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+// REGISTER
 export const registerUser = async (payload: RegisterPayload) => {
-  return api.post('/users', payload); // ini akan jadi https://68ae9bb6b91dfcdd62b9a392.mockapi.io/api/v1/users
+  return api.post('/users', payload); 
 };
 
-export const loginUser = async (email: string) => {
-  const response = await api.get(`/users?email=${email}`); // jadi https://68ae9bb6b91dfcdd62b9a392.mockapi.io/api/v1/users?email=...
-  return response.data[0];
-};
+// LOGIN
+export const loginUser = async (payload: LoginPayload) => {
+  const { email, password } = payload; // ambil dari payload
 
+  // cari user berdasarkan email
+  const response = await api.get(`/users?email=${email}`);
+  const user = response.data[0];
+
+  // validasi password sederhana (karena MockAPI bukan real auth)
+  if (user && user.password === password) {
+    return user;
+  }
+
+  throw new Error("Invalid email or password");
+};

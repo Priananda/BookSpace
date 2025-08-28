@@ -1,19 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { registerUser } from '../../features/auth/authAPI';
+import { registerUser, type RegisterPayload } from '../../features/auth/authAPI';
 import AuthButton from '../../components/AuthButton';
 import { useRouter } from 'next/navigation';
 
-// Tipe data form registrasi
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-}
-
 const Register: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<RegisterPayload>({
     username: '',
     email: '',
     password: '',
@@ -30,9 +23,7 @@ const Register: React.FC = () => {
     if (!email.includes('@') || password.length < 6) {
       return alert('Email harus valid dan password ≥ 6 karakter');
     }
-
     await registerUser(formData);
-    alert('Registrasi berhasil. Silakan login.');
     router.push('/login');
   };
 

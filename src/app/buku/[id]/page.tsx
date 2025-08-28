@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getBookById } from '../../../features/books/booksAPI';
-
+import Image from 'next/image';
 interface Book {
   id: string;
   title: string;
   author: string;
   category: string;
   price: number;
-  description?: string;
-  coverUrl?: string;
+  description: string;
+  cover: string;
 }
 
 const BookDetail = () => {
@@ -59,16 +59,24 @@ const handleAddFavorite = () => {
 
   return (
     <div>
+      {book.cover && (
+                     <Image
+                       src={book.cover}
+                       alt={book.title}
+                       width={300}       
+                       height={400}      
+                       className="rounded mb-2 object-cover"
+                     />
+                   )}
       <h1>{book.title}</h1>
       <p><strong>Penulis:</strong> {book.author}</p>
       <p><strong>Kategori:</strong> {book.category}</p>
       <p><strong>Harga:</strong> {book.price}</p>
       <p><strong>Deskripsi:</strong> {book.description || 'Tidak ada deskripsi.'}</p>
-      {book.coverUrl && (
-        <img src={book.coverUrl} alt={book.title} width={200} />
-      )}
+    
 
-      <button onClick={handleAddFavorite} disabled={isFavorited}>
+
+      <button className='px-10 py-3 bg-blue-700 rounded-full text-white mt-5' onClick={handleAddFavorite} disabled={isFavorited}>
         {isFavorited ? 'Sudah di Favorite' : 'Tambahkan ke Favorite'}
       </button>
     </div>
