@@ -1,17 +1,19 @@
+// components/Button.tsx
 import React from 'react';
 
-interface AuthButtonProps {
-  label: string;
+interface ButtonProps {
+  label?: string;
   onClick?: () => void;
-  type?: 'button' | 'submit';
-  className?: string; // optional className
+  type?: 'button' | 'submit' | 'reset';
+  className?: string;
+   disabled?: boolean;
 }
 
-const AuthButton: React.FC<AuthButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
-  type = 'submit',
-  className = '', // <-- default empty string
+  type = 'button',
+  className = '',
 }) => {
   return (
     <button
@@ -24,4 +26,4 @@ const AuthButton: React.FC<AuthButtonProps> = ({
   );
 };
 
-export default AuthButton;
+export default Button;

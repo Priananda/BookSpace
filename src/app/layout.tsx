@@ -5,7 +5,6 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import { store } from '../app/store';
 import { ThemeProvider } from "next-themes";
-import ThemeToggle from "../components/ThemeToggle";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
