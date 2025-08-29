@@ -9,7 +9,7 @@ export default async function Dashboard() {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">📚 Dashboard Buku</h2>
+      {/* <h2 className="text-2xl font-bold mb-4">📚 Dashboard Buku</h2> */}
       {/* Passing data awal ke client component */}
       <BookListClient initialBooks={books} />
     </div>

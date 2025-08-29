@@ -21,7 +21,7 @@ const Login: React.FC = () => {
   const dispatch = useDispatch();
 
   
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
   
 
@@ -61,6 +61,7 @@ const Login: React.FC = () => {
   };
 
    return (
+    <>
     <div className="flex items-center justify-center rounded-md">
       <div className="flex w-full mt-5 max-w-4xl bg-white rounded-md shadow-md">
         {/* Teks Kiri */}
@@ -115,6 +116,7 @@ const Login: React.FC = () => {
   </div>
 )}
     </div>
+    </>
   );
 };
 

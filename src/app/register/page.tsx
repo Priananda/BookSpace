@@ -37,6 +37,7 @@ const Register: React.FC = () => {
   };
 
    return (
+    <>
     <div className="flex items-center justify-center rounded-md">
       <div className="flex w-full mt-5 max-w-4xl bg-white rounded-md shadow-md">
         {/* Teks Kiri */}
@@ -100,7 +101,7 @@ const Register: React.FC = () => {
 )}
 
     </div>
-    
+    </>
   );
 };
 

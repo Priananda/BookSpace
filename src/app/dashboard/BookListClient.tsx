@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { getAuthToken } from '../../utils/cookie';
+import AllButton from '../../components/AllButton';
 
 interface ApiBook {
   id: string;
@@ -51,58 +52,97 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
 
   return (
     <>
-      {/* Search Input */}
+    <div className="container mx-auto">
+    <div className="mt-1">
+      <h2 className="mb-5 text-2xl font-bold">📚 Dashboard Book</h2> 
+    </div>
+     <div className="w-28 mb-5">
+      <Link href="/favorite">
+    <AllButton label="Favorite" />
+  </Link>
+    </div>
+      <div className="flex mb-3 space-x-2">
       <input
         type="text"
-        placeholder="Cari judul buku..."
+        placeholder="Cari judul buku......"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="border p-2 rounded mb-4 w-full max-w-sm"
+        className="p-2 mb-5 focus:outline-none border border-gray-300 rounded-md shadow-sm w-full"
       />
+  <div className="relative inline-block text-md">
+<select
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+  className="p-2 mb-5 text-gray-900 dark:text-white bg-white 
+             focus:outline-none border border-gray-300 dark:border-gray-600 
+             rounded-md shadow-sm appearance-none pr-10 cursor-pointer"
+>
+  <option value="">Semua Kategori</option>
+  {categories.map((cat) => (
+    <option key={cat} value={cat} className="text-gray-900 dark:text-white">
+      {cat}
+    </option>
+  ))}
+</select>
 
-      {/* Filter Kategori */}
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="border p-2 rounded mb-4"
-      >
-        <option value="">Semua Kategori</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
+
+  {/* SVG custom di pojok kanan */}
+  <div className="flex absolute -mt-4 items-center pointer-events-none inset-y-0 right-3">
+    <svg
+      className="w-5 h-5 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
+</div>
+
+      </div>
 
       {/* List Buku */}
       {filteredBooks.length === 0 ? (
-        <p>Buku tidak ditemukan.</p>
+        <div className="mt-5 text-center">
+        <p className="text-gray-500">Buku yang anda cari tidak dapat ditemukan.</p>
+        </div>
       ) : (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredBooks.map((book) => (
-            <li
-              key={book.id}
-              className="border p-4 rounded shadow hover:shadow-lg transition"
-            >
-              {book.cover && (
-                <Image
-                  src={book.cover}
-                  alt={book.title}
-                  width={300}
-                  height={400}
-                  className="rounded mb-2 object-cover"
-                />
-              )}
-
-              <Link href={`/buku/${book.id}`}>
-                <h3 className="text-xl font-semibold mb-1 hover:underline">{book.title}</h3>
-              </Link>
-              <p className="text-sm text-gray-600 mb-1">Author: {book.author}</p>
-              <p className="text-sm text-gray-600 mb-1">Category: {book.category}</p>
-            </li>
-          ))}
-        </ul>
+  <div className="flex justify-center w-full"> 
+  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
+  {filteredBooks.map((book) => (
+    <li
+      key={book.id}
+      className="p-3 border border-gray-300 rounded shadow-md transition flex flex-col h-full"
+    >
+      {book.cover && (
+        <Image
+          src={book.cover}
+          alt={book.title}
+          width={400}
+          height={300}
+          className="mb-5 rounded object-cover w-full h-full"
+          unoptimized
+        />
       )}
+
+      <Link href={`/buku/${book.id}`}>
+        <h1 className="mb-2 text-lg font-semibold hover:underline hover:text-gray-500">
+          {book.title}
+        </h1>
+      </Link>
+      <div className="space-y-1 mb-1">
+      <p className="text-md text-gray-500">Author: {book.author}</p>
+      <p className="text-md text-gray-500">Category: {book.category}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+</div>
+
+        
+      )}
+      </div>
     </>
   );
 };
