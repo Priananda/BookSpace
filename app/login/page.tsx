@@ -106,7 +106,7 @@ const Login: React.FC = () => {
         </div>
       </div>
         {showModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+  <div className="fixed inset-0 px-2 flex items-center justify-center bg-black/50 z-50">
     <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
       <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
       <p className="mb-4 text-gray-500 ">{modalMessage}</p>

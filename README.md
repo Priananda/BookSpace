@@ -3,6 +3,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 
 # BookSpace
+# I Kadek Priananda
 
 ## Deskripsi Proyek
 Sistem bookSpace sederhana untuk menampilkan daftar buku dan detail buku.
@@ -12,8 +13,8 @@ Fitur-fitur:
 - Halaman dashboard daftar buku menggunakan mockapi.io.
 - Pencarian buku berdasarkan judul buku.
 - Filter kategori berdasarkan kategori buku.
-- Halaman detail buku dan halaman favorite.
-- Menampilkan daftar buku yang telah di pilih user sebagai buku favorite.
+- Halaman detail buku berdasarkan id dan halaman favorit berdasarkan localstorage.
+- Menampilkan daftar buku yang telah dipilih user sebagai buku favorite.
 - Menambahkan buku ke favorit dan tersimpan pada local storage.
 - Menerapkan tema terang dan gelap.
 - Responsive desain berbagai device laptop, tablet, dan hp.
@@ -26,9 +27,10 @@ Fitur-fitur:
 - **Theme Management**: `next-themes`
 - **Styling**: Tailwind CSS
 - **Storage**: localStorage (pada fitur favorit buku)
+- **Jest**: Unit test
 
 ## Hal-hal apa saja yang dikembangkan
-- Authentikasi register login menggunakan JWT
+- Authentikasi register dan login menggunakan JWT
 - Dashboard daftar buku
 - Pencarian buku
 - Pengkategorian buku
@@ -46,6 +48,9 @@ git clone https://github.com/Priananda/BookSpace.git
 
 
 First, run the development server:
+
+# test
+npm run test
 
 ```bash
 npm run dev

@@ -25,7 +25,7 @@ export default async function BookDetailPage({ params }: BookPageProps) {
     <>
 <div className="container mx-auto">
 <div className="mt-5 flex w-full justify-center items-center">
-  <div className="p-4 shadow-md">
+  <div className="p-4">
     {book.cover && (
       <Image
         src={book.cover}
@@ -48,7 +48,7 @@ export default async function BookDetailPage({ params }: BookPageProps) {
     <div className="mt-5">
       <FavoriteBookId book={book} />
       <Link href="/dashboard">
-    <AllButton label="Back to dashboard" />
+    <AllButton label="Kembali ke dashboard" />
   </Link>
     </div>
   </div>

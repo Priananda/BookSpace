@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import AllButton from '../../src/components/AllButton';
+import Link from 'next/link';
 interface Book {
   id: string;
   title: string;
@@ -14,16 +16,12 @@ interface Book {
 
 const FavoritePage: React.FC = () => {
   const [favoriteBooks, setFavoriteBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const favBooks: Book[] = JSON.parse(localStorage.getItem('favorite_book') || '[]');
     setFavoriteBooks(favBooks);
-    setLoading(false);
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-
+ 
   return (
     <>
     <div className="container mx-auto">
@@ -31,13 +29,18 @@ const FavoritePage: React.FC = () => {
       <div className="mt-1">
       <h2 className="mb-5 text-center text-xl font-bold"> Buku favorit anda </h2> 
     </div>
+     <div className="w-56 mb-5">
+      <Link href="/dashboard">
+    <AllButton label="Kembali ke dashboard" />
+  </Link>
+    </div>
       {favoriteBooks.length === 0 ? (
         <div className="mt-5 text-center">
         <p className="text-gray-500">Buku favorit anda tidak dapat ditemukan.</p>
         </div>
       ) : (
    
-  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full">
+  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     {favoriteBooks.map((book, index) => (
       <li
         key={book.id ?? index}

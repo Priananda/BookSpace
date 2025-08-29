@@ -51,7 +51,7 @@ const Register: React.FC = () => {
         {/* Form Register Kanan */}
         <div className="w-full lg:w-1/2 p-9 m-5 rounded-md shadow-lg">
           <h2 className="mb-5 text-black dark:text-black text-xl font-semibold">Register</h2>
-          <form onSubmit={handleRegister} className="space-y-5">
+          <form onSubmit={handleRegister} data-testid="register-form" className="space-y-5">
             <input 
               type="text" 
               name="username" 
@@ -90,7 +90,7 @@ const Register: React.FC = () => {
         </div>
       </div>
       {showModal && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+  <div className="fixed inset-0 px-2 flex items-center justify-center bg-black/50 z-50">
     <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
       <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
       <p className="mb-4 text-gray-500 ">{modalMessage}</p>

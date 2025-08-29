@@ -54,11 +54,11 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
     <>
     <div className="container mx-auto">
     <div className="mt-1">
-      <h2 className="mb-5 text-2xl font-bold">📚 Dashboard Book</h2> 
+      <h2 className="mb-5 text-2xl font-bold">📚 Dashboard Buku</h2> 
     </div>
      <div className="w-28 mb-5">
       <Link href="/favorite">
-    <AllButton label="Favorite" />
+    <AllButton label="Favorit" />
   </Link>
     </div>
       <div className="flex mb-3 space-x-2">
@@ -108,7 +108,7 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
         <p className="text-gray-500">Buku yang anda cari tidak dapat ditemukan.</p>
         </div>
       ) : (
-  <div className="flex justify-center w-full"> 
+  <div> 
   <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5">
   {filteredBooks.map((book) => (
     <li
