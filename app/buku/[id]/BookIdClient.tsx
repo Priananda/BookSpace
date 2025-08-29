@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import AllButton from '../../../components/AllButton';
+import AllButton from '../../../src/components/AllButton';
 
 interface Book {
   id: string;

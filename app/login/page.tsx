@@ -1,39 +1,63 @@
 'use client';
 
 import React, { useState } from 'react';
-import { registerUser, type RegisterPayload } from '../../features/auth/authAPI';
-import AuthButton from '../../components/AuthButton';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { loginUser, type LoginPayload } from '../../src/features/auth/authAPI';
+import { setAuthToken } from '../../src/utils/cookie';
+import { loginSuccess } from '../../src/features/auth/authSlice';
+import AuthButton from '../../src/components/AuthButton';
 import Link from 'next/link';
-import AllButton from '../../components/AllButton';
+import AllButton from '../../src/components/AllButton';
 
-const Register: React.FC = () => {
-  const [formData, setFormData] = useState<RegisterPayload>({
-    username: '',
+
+const Login: React.FC = () => {
+  const [formData, setFormData] = useState<LoginPayload>({
     email: '',
     password: '',
   });
+
   const router = useRouter();
+  const dispatch = useDispatch();
 
-  const [showModal, setShowModal] = useState(true);
-  const [modalMessage, setModalMessage] = useState('');
-
+  
+    const [showModal, setShowModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = formData;
-    if (!email.includes('@') || password.length < 6) {
-      setModalMessage('Buat email dengan benar dan password minimal 6 karakter.');
+   if (!email.includes('@') || password.length < 6) {
+      setModalMessage('Masukan email dan password dengan benar.');
       setShowModal(true);
       return;
   }
 
-    await registerUser(formData);
-    router.push('/login');
+    try {
+      const user = await loginUser(formData);
+
+      if (user) {
+        const fakeToken = btoa(`${user.id}:${user.email}`);
+
+        // ✅ simpan ke cookie
+        setAuthToken(fakeToken);
+
+        // ✅ update redux state
+        dispatch(loginSuccess(fakeToken));
+
+        // ✅ redirect ke dashboard
+        router.push('/dashboard');
+      } else {
+        alert('Login gagal');
+      }
+    } catch (error) {
+      alert('Login gagal: ' + (error as Error).message);
+    }
   };
 
    return (
@@ -44,23 +68,14 @@ const Register: React.FC = () => {
         <div className="hidden lg:flex w-1/2 p-9 justify-start items-center">
           <div>
             <h2 className="mb-5 text-black dark:text-black text-4xl font-semibold">BookSpace</h2>
-            <p className="text-md text-gray-500 dark:text-gray-500">Silakan daftar menggunakan informasi pribadi Anda agar tetap terhubung dengan kami.</p>
+            <p className="text-md text-gray-500 dark:text-gray-500">Silakan login terlebih dahulu</p>
           </div>
         </div>
 
         {/* Form Register Kanan */}
         <div className="w-full lg:w-1/2 p-9 m-5 rounded-md shadow-lg">
-          <h2 className="mb-5 text-black dark:text-black text-xl font-semibold">Register</h2>
-          <form onSubmit={handleRegister} className="space-y-5">
-            <input 
-              type="text" 
-              name="username" 
-              value={formData.username}
-              placeholder="Username" 
-              className="w-full p-3 border border-gray-200 placeholder:text-gray-500 placeholder:text-md rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500" 
-              onChange={handleChange} 
-              required
-            />
+          <h2 className="mb-5 text-black dark:text-black text-xl font-semibold">Login</h2>
+          <form onSubmit={handleLogin} className="space-y-5">
             <input 
               type="email" 
               name="email" 
@@ -79,17 +94,18 @@ const Register: React.FC = () => {
               onChange={handleChange} 
               required
             />
-          <AuthButton  label="Register"/>
+            <AuthButton  label="Login"/>
           </form>
+    
 
           <div className="">
-          <p className="mt-5 text-md text-center text-gray-500">Sudah punya akun? 
-            <Link href="/login" className="text-blue-500 hover:underline pl-1">Masuk</Link>
+          <p className="mt-5 text-md text-center text-gray-500">Belum punya akun? 
+            <Link href="/register" className="text-blue-500 hover:underline pl-1">Daftar</Link>
           </p>
           </div>
         </div>
       </div>
-      {showModal && (
+        {showModal && (
   <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
     <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
       <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
@@ -99,10 +115,9 @@ const Register: React.FC = () => {
     </div>
   </div>
 )}
-
     </div>
     </>
   );
 };
 
-export default Register;
+export default Login;

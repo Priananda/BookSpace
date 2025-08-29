@@ -4,8 +4,8 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { getAuthToken } from '../../utils/cookie';
-import AllButton from '../../components/AllButton';
+import { getAuthToken } from '../../src/utils/cookie';
+import AllButton from '../../src/components/AllButton';
 
 interface ApiBook {
   id: string;

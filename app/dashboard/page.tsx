@@ -1,7 +1,7 @@
 // app/dashboard/page.tsx
 import React from 'react';
-import { getBookList } from '../../features/books/booksAPI';
-import BookListClient from '../dashboard/BookListClient';
+import { getBookList } from '../../src/features/books/booksAPI';
+import BookListClient from './BookListClient';
 
 
 export default async function Dashboard() {

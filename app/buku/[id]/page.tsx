@@ -1,7 +1,7 @@
-import { getBookById } from '../../../features/books/booksAPI';
+import { getBookById } from '../../../src/features/books/booksAPI';
 import Image from 'next/image';
 import FavoriteBookId from './BookIdClient';
-import AllButton from '../../../components/AllButton';
+import AllButton from '../../../src/components/AllButton';
 import Link from 'next/link';
 
 interface Book {
