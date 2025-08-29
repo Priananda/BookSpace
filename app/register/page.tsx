@@ -15,7 +15,7 @@ const Register: React.FC = () => {
   });
   const router = useRouter();
 
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
 
