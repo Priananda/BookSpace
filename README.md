@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 # BookSpace
 
 ## Deskripsi Proyek
-Sistem bookSpace sederhana ini untuk menampilkan daftar buku dan detail buku.
+Sistem bookSpace sederhana untuk menampilkan daftar buku dan detail buku.
 
 Fitur-fitur:
 - Halaman registrasi dan login menggunakan mockapi.io.
