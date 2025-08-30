@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { loginUser, type LoginPayload } from '../../src/features/auth/authAPI';
-import { setAuthToken } from '../../src/utils/cookie';
 import { loginSuccess } from '../../src/features/auth/authSlice';
 import AuthButton from '../../src/components/AuthButton';
-import Link from 'next/link';
+import { setAuthToken } from '../../src/utils/cookie';
 import AllButton from '../../src/components/AllButton';
+import Link from 'next/link';
 
 
 const Login: React.FC = () => {
@@ -20,11 +20,9 @@ const Login: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   
-    const [showModal, setShowModal] = useState(false);
-    const [modalMessage, setModalMessage] = useState('');
-  
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -44,19 +42,13 @@ const Login: React.FC = () => {
       if (user) {
         const fakeToken = btoa(`${user.id}:${user.email}`);
 
-        // ✅ simpan ke cookie
         setAuthToken(fakeToken);
-
-        // ✅ update redux state
         dispatch(loginSuccess(fakeToken));
-
-        // ✅ redirect ke dashboard
         router.push('/dashboard');
-      } else {
-        alert('Login gagal');
-      }
+      } 
+
     } catch (error) {
-      alert('Login gagal: ' + (error as Error).message);
+      console.error('Login gagal:', error);
     }
   };
 
@@ -64,7 +56,6 @@ const Login: React.FC = () => {
     <>
     <div className="flex items-center justify-center rounded-md">
       <div className="flex w-full mt-5 max-w-4xl bg-white rounded-md shadow-md">
-        {/* Teks Kiri */}
         <div className="hidden lg:flex w-1/2 p-9 justify-start items-center">
           <div>
             <h2 className="mb-5 text-black dark:text-black text-4xl font-semibold">BookSpace</h2>
@@ -72,10 +63,10 @@ const Login: React.FC = () => {
           </div>
         </div>
 
-        {/* Form Register Kanan */}
+
         <div className="w-full lg:w-1/2 p-9 m-5 rounded-md shadow-lg">
           <h2 className="mb-5 text-black dark:text-black text-xl font-semibold">Login</h2>
-          <form onSubmit={handleLogin} className="space-y-5">
+          <form onSubmit={handleLogin} data-testid="login-test" className="space-y-5">
             <input 
               type="email" 
               name="email" 
@@ -105,18 +96,17 @@ const Login: React.FC = () => {
           </div>
         </div>
       </div>
-        {showModal && (
-  <div className="fixed inset-0 px-2 flex items-center justify-center bg-black/50 z-50">
-    <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
-      <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
-      <p className="mb-4 text-gray-500 ">{modalMessage}</p>
-     <AllButton label="Tutup" onClick={() => setShowModal(false)} />
-
+      {showModal && (
+      <div className="fixed inset-0 px-2 flex items-center justify-center bg-black/50 z-50">
+        <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
+        <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
+        <p className="mb-4 text-gray-500 ">{modalMessage}</p>
+        <AllButton label="Tutup" onClick={() => setShowModal(false)} />
+        </div>
+      </div>
+      )}
     </div>
-  </div>
-)}
-    </div>
-    </>
+  </>
   );
 };
 

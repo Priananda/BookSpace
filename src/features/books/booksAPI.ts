@@ -1,8 +1,7 @@
-// src/features/books/booksAPI.ts
-import api from '../../lib/API'; // sesuaikan path sesuai struktur
+import api from '../../lib/API';
 
 export const getBookList = async () => {
-  const response = await api.get('/ListOfBooks'); // endpoint sesuai API mock kamu
+  const response = await api.get('/ListOfBooks');
   return response.data;
 };
 

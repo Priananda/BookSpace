@@ -25,6 +25,7 @@ export default function FavoriteButton({ book }: FavoriteButtonProps) {
     setIsFavorited(favs.some((b) => b.id === book.id));
   }, [book.id]);
 
+
   const handleAddFavorite = () => {
     const favs: Book[] = JSON.parse(localStorage.getItem('favorite_book') || '[]');
 
@@ -35,13 +36,13 @@ export default function FavoriteButton({ book }: FavoriteButtonProps) {
     setIsFavorited(true);
   };
 
-  return (
-   <AllButton
-  label={isFavorited ? 'Sudah di Favorite' : 'Tambahkan ke Favorite'}
-  onClick={handleAddFavorite}
-  disabled={isFavorited}
-/>
-
-    
-  );
+return (
+  <>
+    <AllButton
+      label={isFavorited ? 'Sudah di Favorite' : 'Tambahkan ke Favorite'}
+      onClick={handleAddFavorite}
+      disabled={isFavorited}
+    />
+  </>
+);
 }

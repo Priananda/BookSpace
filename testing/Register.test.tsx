@@ -1,80 +1,72 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import React from 'react';
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import Register from "../app/register/page";
+import { useRouter } from "next/navigation";
+import { registerUser } from "../src/features/auth/authAPI";
 
-import Register from '../app/register/page';
-import { registerUser } from '../src/features/auth/authAPI';
-import { vi } from 'vitest';
-
-vi.mock('next/navigation', () => ({
-  useRouter: () => ({
-    push: vi.fn(),
-  }),
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+jest.mock("../src/features/auth/authAPI", () => ({
+  registerUser: jest.fn(),
 }));
 
-vi.mock('../src/features/auth/authAPI', () => ({
-  registerUser: vi.fn(),
-}));
+describe("Halaman Register", () => {
+  const pushMock = jest.fn();
 
-describe('Register Page', () => {
   beforeEach(() => {
-    vi.clearAllMocks(); // gunakan vi bukan jest
+    (useRouter as jest.Mock).mockReturnValue({ push: pushMock });
+    jest.clearAllMocks();
   });
 
-  it('melakukan input kolom dan tombol secara benar', () => {
+  it("menampilkan input username, email, dan password", () => {
     render(<Register />);
-    expect(screen.getByPlaceholderText('Username')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
-    expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
-    expect(screen.getByText('Register')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Email")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Register" })).toBeInTheDocument();
   });
 
- it('menampilkan modal jika email salah dan password kurang dari 6 karakter', async () => {
-  render(<Register />);
-  
-  fireEvent.change(screen.getByPlaceholderText('Email'), {
-    target: { value: 'invalidemail' }, // email tanpa '@'
-  });
-  fireEvent.change(screen.getByPlaceholderText('Password'), {
-    target: { value: '123' }, // password kurang dari 6 karakter
-  });
+  it("menampilkan modal jika email/password tidak valid", () => {
+    render(<Register />);
 
-  fireEvent.submit(screen.getByTestId('register-form'));
-
-  await waitFor(() => {
-    expect(screen.getByText(/Buat email dengan benar dan password minimal 6 karakter./i)).toBeInTheDocument();
-  });
-});
-
-
-  it('memanggil registerUser pada endpoint jika form valid', async () => {
-    const mockedRegisterUser = vi.mocked(registerUser);
-    mockedRegisterUser.mockResolvedValueOnce({
-      data: {},
-      status: 200,
-      statusText: 'OK',
-      headers: {},
-      config: {},
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "pengguna salah dalam menginputkan" },
     });
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "abc" },
+    });
+
+    fireEvent.submit(screen.getByTestId("register-test"));
+
+    expect(
+      screen.getByText(/Buat email dengan benar dan password minimal 6 karakter./i)
+    ).toBeInTheDocument();
+  });
+
+  it("memanggilkan registerUser dan redirect ke /login jika data valid", async () => {
+    (registerUser as jest.Mock).mockResolvedValue({});
 
     render(<Register />);
-    fireEvent.change(screen.getByPlaceholderText('Username'), {
-      target: { value: 'test12' },
+
+    fireEvent.change(screen.getByPlaceholderText("Username"), {
+      target: { value: "pengguna12" },
     });
-    fireEvent.change(screen.getByPlaceholderText('Email'), {
-      target: { value: 'test12@email.com' },
+    fireEvent.change(screen.getByPlaceholderText("Email"), {
+      target: { value: "pengguna12@example.com" },
     });
-    fireEvent.change(screen.getByPlaceholderText('Password'), {
-      target: { value: 'test123' },
+    fireEvent.change(screen.getByPlaceholderText("Password"), {
+      target: { value: "password12" },
     });
 
-    fireEvent.submit(screen.getByTestId('register-form'));
+    fireEvent.submit(screen.getByTestId("register-test"));
 
     await waitFor(() => {
-      expect(mockedRegisterUser).toHaveBeenCalledWith({
-        username: 'test12',
-        email: 'test12@email.com',
-        password: 'test123',
+      expect(registerUser).toHaveBeenCalledWith({
+        username: "pengguna12",
+        email: "pengguna12@example.com",
+        password: "password12",
       });
+      expect(pushMock).toHaveBeenCalledWith("/login");
     });
   });
 });

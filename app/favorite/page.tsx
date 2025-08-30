@@ -22,30 +22,29 @@ const FavoritePage: React.FC = () => {
   }, []);
 
  
-  return (
-    <>
+return (
+  <>
     <div className="container mx-auto">
-    <div>
-      <div className="mt-1">
-      <h2 className="mb-5 text-center text-xl font-bold"> Buku favorit anda </h2> 
-    </div>
-     <div className="w-56 mb-5">
-      <Link href="/dashboard">
-    <AllButton label="Kembali ke dashboard" />
-  </Link>
-    </div>
-      {favoriteBooks.length === 0 ? (
+      <div>
+        <div className="mt-1">
+        <h2 className="mb-5 text-center text-xl font-bold"> Buku favorit anda </h2> 
+        </div>
+        <div className="w-56 mb-5">
+        <Link href="/dashboard">
+        <AllButton label="Kembali ke dashboard" />
+        </Link>
+        </div>
+        {favoriteBooks.length === 0 ? (
         <div className="mt-5 text-center">
         <p className="text-gray-500">Buku favorit anda tidak dapat ditemukan.</p>
         </div>
-      ) : (
+        ) : (
    
-  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-    {favoriteBooks.map((book, index) => (
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {favoriteBooks.map((book, index) => (
       <li
-        key={book.id ?? index}
-        className=""
-      >
+          key={book.id ?? index}
+          className="">
         <div className="w-full p-4 shadow-md flex flex-col h-full">
           {book.cover && (
             <Image
@@ -67,12 +66,12 @@ const FavoritePage: React.FC = () => {
           </div>
         </div>
       </li>
-    ))}
-  </ul>
+      ))}
+      </ul>
       )}
     </div>
     </div>
-    </>
+  </>
   );
 };
 

@@ -3,8 +3,7 @@
 import Link from 'next/link';
 import AllButton from '../src/components/AllButton';
 
-
-export default function HomePage() {
+export default function MainPage() {
   return (
     <main className="min-h-screen flex justify-center items-center text-center">
       <div>

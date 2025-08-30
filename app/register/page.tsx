@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { registerUser, type RegisterPayload } from '../../src/features/auth/authAPI';
 import AuthButton from '../../src/components/AuthButton';
+import AllButton from '../../src/components/AllButton';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import AllButton from '../../src/components/AllButton';
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState<RegisterPayload>({
@@ -13,11 +13,11 @@ const Register: React.FC = () => {
     email: '',
     password: '',
   });
+
   const router = useRouter();
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -26,21 +26,27 @@ const Register: React.FC = () => {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { email, password } = formData;
+
     if (!email.includes('@') || password.length < 6) {
       setModalMessage('Buat email dengan benar dan password minimal 6 karakter.');
       setShowModal(true);
       return;
-  }
+    }
 
-    await registerUser(formData);
-    router.push('/login');
+    try {
+      
+      await registerUser(formData);
+      router.push('/login');
+
+    } catch (error) {
+      console.error('Register gagal:', error);
+    }
   };
 
    return (
     <>
     <div className="flex items-center justify-center rounded-md">
       <div className="flex w-full mt-5 max-w-4xl bg-white rounded-md shadow-md">
-        {/* Teks Kiri */}
         <div className="hidden lg:flex w-1/2 p-9 justify-start items-center">
           <div>
             <h2 className="mb-5 text-black dark:text-black text-4xl font-semibold">BookSpace</h2>
@@ -48,10 +54,10 @@ const Register: React.FC = () => {
           </div>
         </div>
 
-        {/* Form Register Kanan */}
+
         <div className="w-full lg:w-1/2 p-9 m-5 rounded-md shadow-lg">
           <h2 className="mb-5 text-black dark:text-black text-xl font-semibold">Register</h2>
-          <form onSubmit={handleRegister} data-testid="register-form" className="space-y-5">
+          <form onSubmit={handleRegister} data-testid="register-test" className="space-y-5">
             <input 
               type="text" 
               name="username" 
@@ -90,18 +96,16 @@ const Register: React.FC = () => {
         </div>
       </div>
       {showModal && (
-  <div className="fixed inset-0 px-2 flex items-center justify-center bg-black/50 z-50">
-    <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
-      <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
-      <p className="mb-4 text-gray-500 ">{modalMessage}</p>
-     <AllButton label="Tutup" onClick={() => setShowModal(false)} />
-
+      <div className="fixed inset-0 px-2 flex items-center justify-center bg-black/50 z-50">
+        <div className="p-6 bg-white rounded-md shadow-lg max-w-sm w-full">
+        <h2 className="mb-5 text-lg font-semibold">Peringatan</h2>
+        <p className="mb-4 text-gray-500 ">{modalMessage}</p>
+        <AllButton label="Tutup" onClick={() => setShowModal(false)} />
+        </div>
+      </div>
+      )}
     </div>
-  </div>
-)}
-
-    </div>
-    </>
+  </>
   );
 };
 

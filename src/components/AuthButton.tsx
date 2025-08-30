@@ -3,16 +3,17 @@ import React from 'react';
 interface AuthButtonProps {
   label: string;
   onClick?: () => void;
+  className?: string;
   type?: 'button' | 'submit';
-  className?: string; // optional className
 }
 
 const AuthButton: React.FC<AuthButtonProps> = ({
   label,
   onClick,
+  className = '',
   type = 'submit',
-  className = '', // <-- default empty string
 }) => {
+  
   return (
     <button
       onClick={onClick}

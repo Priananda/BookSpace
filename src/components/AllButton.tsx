@@ -1,11 +1,10 @@
-// components/Button.tsx
 import React from 'react';
 interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset';
   label?: string;
   onClick?: () => void;
-  type?: 'button' | 'submit' | 'reset';
   className?: string;
-   disabled?: boolean;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -14,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
   className = '',
 }) => {
+  
   return (
     <button
       onClick={onClick}
