@@ -21,6 +21,7 @@ export default function FavoriteButton({ book }: FavoriteButtonProps) {
   const [favorites, setFavorites] = useState<Book[]>([]);
   const [isFavorited, setIsFavorited] = useState(false);
 
+  
   useEffect(() => {
     const favs: Book[] = JSON.parse(localStorage.getItem('favorite_book') || '[]');
     setFavorites(favs);
