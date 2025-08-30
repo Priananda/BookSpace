@@ -19,6 +19,12 @@ Fitur-fitur:
 - Menerapkan tema terang dan gelap.
 - Responsive desain pada device laptop, tablet, dan hp.
 
+## Basis Data testing
+-API
+https://68ae9bb6b91dfcdd62b9a392.mockapi.io/api/v1/users
+
+https://68ae9bb6b91dfcdd62b9a392.mockapi.io/api/v1/ListOfBooks
+
 ## Alat Pengembangan
 - **Framework** : Next.js 15.5.2
 - **Language**  : TypeScript
@@ -43,7 +49,7 @@ Fitur-fitur:
 ## Cara menjalankan di lokal 
 - **Clone repository**  
 ```bash
-git clone https://github.com/Priananda/BookSpace.git
+git clone https://github.com/Priananda/bookspace.git
 
 First, run the development server:
 

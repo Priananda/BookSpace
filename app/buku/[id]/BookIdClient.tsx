@@ -18,31 +18,30 @@ interface FavoriteButtonProps {
 }
 
 export default function FavoriteButton({ book }: FavoriteButtonProps) {
+  const [favorites, setFavorites] = useState<Book[]>([]);
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
     const favs: Book[] = JSON.parse(localStorage.getItem('favorite_book') || '[]');
-    setIsFavorited(favs.some((b) => b.id === book.id));
+    setFavorites(favs);
+    setIsFavorited(favs.some(b => b.id === book.id));
   }, [book.id]);
 
-
   const handleAddFavorite = () => {
-    const favs: Book[] = JSON.parse(localStorage.getItem('favorite_book') || '[]');
 
-    if (favs.some(b => b.id === book.id)) return;
+    if (favorites.some(b => b.id === book.id)) return;
 
-    const updated = [...favs, book];
+    const updated = [...favorites, book];
+    setFavorites(updated); 
+    setIsFavorited(true); 
     localStorage.setItem('favorite_book', JSON.stringify(updated));
-    setIsFavorited(true);
   };
 
-return (
-  <>
+  return (
     <AllButton
       label={isFavorited ? 'Sudah di Favorite' : 'Tambahkan ke Favorite'}
       onClick={handleAddFavorite}
       disabled={isFavorited}
     />
-  </>
-);
+  );
 }
