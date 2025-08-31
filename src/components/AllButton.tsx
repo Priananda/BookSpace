@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       type={type}
-      className={`w-full mt-5 py-3 px-6 cursor-pointer rounded-full shadow-md text-white bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300 hover:scale-105 ${className}`}
+      className={`w-full text-md mt-5 py-3 px-6 cursor-pointer rounded-full shadow-md text-white bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300 hover:scale-105 ${className}`}
     >
       {label}
     </button>

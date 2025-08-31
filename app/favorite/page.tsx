@@ -35,7 +35,7 @@ return (
         </Link>
         </div>
         {favoriteBooks.length === 0 ? (
-        <div className="mt-5 text-center">
+        <div className="mt-5 text-md text-center">
         <p className="text-gray-500">Buku favorit anda tidak dapat ditemukan.</p>
         </div>
         ) : (
@@ -58,7 +58,7 @@ return (
           )}
 
           <h1 className="mb-3 text-xl text-start font-semibold">{book.title}</h1>
-          <div className="text-start space-y-2 text-gray-700 flex-grow">
+          <div className="text-start text-md space-y-2 text-gray-700 flex-grow">
             <p><strong>Penulis:</strong> {book.author}</p>
             <p><strong>Kategori:</strong> {book.category}</p>
             <p><strong>Harga:</strong> {book.price}</p>

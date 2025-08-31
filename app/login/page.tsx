@@ -54,6 +54,7 @@ const Login: React.FC = () => {
 
    return (
     <>
+    <div className="container mx-auto">
     <div className="flex items-center justify-center rounded-md">
       <div className="flex w-full mt-5 max-w-4xl bg-white rounded-md shadow-md">
         <div className="hidden lg:flex w-1/2 p-9 justify-start items-center">
@@ -105,6 +106,7 @@ const Login: React.FC = () => {
         </div>
       </div>
       )}
+    </div>
     </div>
   </>
   );

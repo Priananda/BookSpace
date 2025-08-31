@@ -1,9 +1,12 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
+import { logout as logoutAction } from '../../src/features/auth/authSlice';
+import { clearAuthToken } from '../../src/utils/cookie';
 import { getAuthToken } from '../../src/utils/cookie';
 import AllButton from '../../src/components/AllButton';
 import { useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -49,6 +52,14 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
     });
   }, [initialBooks, search, category]);
 
+  
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    clearAuthToken();         
+    dispatch(logoutAction()); 
+    // localStorage.removeItem('favorite_book');
+    router.push('/login');    
+  };
 
 return (
   <>
@@ -56,10 +67,18 @@ return (
       <div className="mt-1">
         <h2 className="mb-5 text-2xl font-bold">📚 Dashboard Buku</h2> 
       </div>
-      <div className="w-28 mb-5">
+      <div className="flex mb-6 gap-2">
+      <div className="w-28">
         <Link href="/favorite">
         <AllButton label="Favorit" />
         </Link>
+      </div>
+      <div className="w-28">
+        <AllButton
+        label="Logout"
+        onClick={() => handleLogout()}
+        />
+      </div>
       </div>
       <div className="flex mb-3 space-x-2">
       <input
@@ -67,7 +86,7 @@ return (
         placeholder="Cari judul buku......"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="p-2 mb-5 focus:outline-none border border-gray-300 rounded-md shadow-sm w-full"
+        className="p-2 mb-5 text-md focus:outline-none border border-gray-300 rounded-md shadow-sm w-full"
       />
       
       <div className="relative inline-block text-md">
@@ -101,7 +120,7 @@ return (
 
       {/* Daftar Buku */}
       {filteredBooks.length === 0 ? (
-        <div className="mt-5 text-center">
+        <div className="mt-5 text-md text-center">
         <p className="text-gray-500">Buku yang anda cari tidak dapat ditemukan.</p>
         </div>
       ) : (
@@ -125,14 +144,14 @@ return (
           )}
 
           <Link href={`/buku/${book.id}`}>
-            <h1 className="mb-2 text-lg font-semibold hover:underline hover:text-gray-500">
+            <h1 className="mb-2 text-xl font-semibold hover:underline hover:text-gray-500">
               {book.title}
             </h1>
           </Link>
       
-          <div className="space-y-1 mb-1">
-            <p className="text-md text-gray-500">Author: {book.author}</p>
-            <p className="text-md text-gray-500">Category: {book.category}</p>
+          <div className="text-md space-y-1 mb-1">
+            <p className="text-gray-500">Author: {book.author}</p>
+            <p className="text-gray-500">Category: {book.category}</p>
           </div>
         </li>
         ))}

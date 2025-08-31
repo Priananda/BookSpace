@@ -39,7 +39,7 @@ return (
           )}
 
           <h1 className="mb-3 text-xl text-start font-semibold">{book.title}</h1>
-          <div className="text-start space-y-2 text-gray-700">
+          <div className="text-start space-y-2 text-gray-500">
             <p><strong>Penulis:</strong> {book.author}</p>
             <p><strong>Kategori:</strong> {book.category}</p>
             <p><strong>Harga:</strong> {book.price}</p>
