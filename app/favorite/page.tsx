@@ -29,7 +29,7 @@ return (
         <div className="mt-1">
         <h2 className="mb-5 text-center text-xl font-bold"> Buku favorit anda </h2> 
         </div>
-        <div className="w-56 mb-5">
+        <div className="p-3 w-64 mb-5">
         <Link href="/dashboard">
         <AllButton label="Kembali ke dashboard" />
         </Link>

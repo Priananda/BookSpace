@@ -8,6 +8,7 @@ import { loginSuccess } from '../../src/features/auth/authSlice';
 import AuthButton from '../../src/components/AuthButton';
 import { setAuthToken } from '../../src/utils/cookie';
 import AllButton from '../../src/components/AllButton';
+import Loading from '../../src/components/Loading'; 
 import Link from 'next/link';
 
 
@@ -22,6 +23,7 @@ const Login: React.FC = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +37,7 @@ const Login: React.FC = () => {
       setShowModal(true);
       return;
   }
-
+    setIsLoading(true);
     try {
       const user = await loginUser(formData);
 
@@ -49,6 +51,9 @@ const Login: React.FC = () => {
 
     } catch (error) {
       console.error('Login gagal:', error);
+    }
+    finally {
+    setIsLoading(false); 
     }
   };
 
@@ -88,7 +93,8 @@ const Login: React.FC = () => {
             />
             <AuthButton  label="Login"/>
           </form>
-    
+          {isLoading && <Loading message="Sedang login..." />}
+
 
           <div className="">
           <p className="mt-5 text-md text-center text-gray-500">Belum punya akun? 

@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { registerUser, type RegisterPayload } from '../../src/features/auth/authAPI';
 import AuthButton from '../../src/components/AuthButton';
 import AllButton from '../../src/components/AllButton';
+import Loading from '../../src/components/Loading'; 
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState<RegisterPayload>({
@@ -18,6 +20,7 @@ const Register: React.FC = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,6 +35,7 @@ const Register: React.FC = () => {
       setShowModal(true);
       return;
     }
+     setIsLoading(true);
 
     try {
       
@@ -41,6 +45,9 @@ const Register: React.FC = () => {
     } catch (error) {
       console.error('Register gagal:', error);
     }
+    finally {
+    setIsLoading(false); 
+  }
   };
 
    return (
@@ -88,6 +95,8 @@ const Register: React.FC = () => {
             />
           <AuthButton  label="Register"/>
           </form>
+          {isLoading && <Loading message="Sedang mendaftar..." />}
+
 
           <div className="">
           <p className="mt-5 text-md text-center text-gray-500">Sudah punya akun? 

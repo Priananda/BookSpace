@@ -5,6 +5,7 @@ import { logout as logoutAction } from '../../src/features/auth/authSlice';
 import { clearAuthToken } from '../../src/utils/cookie';
 import { getAuthToken } from '../../src/utils/cookie';
 import AllButton from '../../src/components/AllButton';
+import Loading from '../../src/components/Loading'; 
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import Image from 'next/image';
@@ -34,6 +35,7 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
     }
   }, [router]);
 
+  const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
 
@@ -55,6 +57,7 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
   
   const dispatch = useDispatch();
   const handleLogout = () => {
+    setIsLoading(true);
     clearAuthToken();         
     dispatch(logoutAction()); 
     // localStorage.removeItem('favorite_book');
@@ -160,6 +163,7 @@ return (
     
     )}
     </div>
+    {isLoading && <Loading message="Keluar..." />}
   </>
   );
 };
