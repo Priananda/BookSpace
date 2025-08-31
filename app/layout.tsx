@@ -29,7 +29,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Provider store={store}>
               <Navbar />
-            <main className="">{children}</main>
+            <main className="p-0 md:p-3 lg:p-3">{children}</main>
              <Footer />
           </Provider>
         </ThemeProvider>
