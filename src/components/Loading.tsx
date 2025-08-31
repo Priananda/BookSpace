@@ -12,7 +12,7 @@ const Loading: React.FC<LoadingProps> = ({
   message,
 }) => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-blue-300/10 bg-opacity-50 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-gray-300/40 z-50">
       <div className="flex flex-col items-center gap-1">
         <svg
           className="animate-spin"
@@ -37,7 +37,7 @@ const Loading: React.FC<LoadingProps> = ({
             d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
           />
         </svg>
-        <p className="text-center text-lg font-semibold text-black">{message}</p>
+        <p className="text-center text-lg font-semibold text-blue-800">{message}</p>
       </div>
     </div>
   );
