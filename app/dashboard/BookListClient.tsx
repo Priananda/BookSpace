@@ -61,7 +61,11 @@ const BookListClient: React.FC<Props> = ({ initialBooks }) => {
     clearAuthToken();         
     dispatch(logoutAction()); 
     // localStorage.removeItem('favorite_book');
-    router.push('/login');    
+      // Tambahkan delay sebelum pindah halaman
+  setTimeout(() => {
+    router.push('/login'); 
+  }, 1000);
+   
   };
 
 return (
