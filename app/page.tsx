@@ -13,9 +13,9 @@ export default function MainPage() {
           Yuk login dulu untuk lanjut ke dashboard.
         </p>
       <Link href="/login">
-    <AllButton label="Login Sekarang" />
-  </Link>
-    </div>
+        <AllButton label="Login Sekarang" />
+      </Link>
+      </div>
     </main>
   </>
   );
