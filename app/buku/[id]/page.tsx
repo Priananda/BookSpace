@@ -1,4 +1,4 @@
-import { getBookById } from '../../../src/features/books/booksAPI';
+import { getBookById } from '../../../src/services/books/booksAPI';
 import AllButton from '../../../src/components/AllButton';
 import FavoriteBookId from './BookIdClient';
 import Image from 'next/image';

@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import Login from "../app/login/page";
 import { useRouter } from "next/navigation";
-import { loginUser } from "../src/features/auth/authAPI";
+import { loginUser } from "../src/services/auth/authAPI";
 import { setAuthToken } from "../src/utils/cookie";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../src/features/auth/authSlice";
+import { loginSuccess } from "../src/stores/auth/authStore";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),

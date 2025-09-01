@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { registerUser, type RegisterPayload } from '../../src/features/auth/authAPI';
+import { registerUser, type RegisterPayload } from '../../src/services/auth/authAPI';
 import AuthButton from '../../src/components/AuthButton';
 import AllButton from '../../src/components/AllButton';
 import Loading from '../../src/components/Loading'; 

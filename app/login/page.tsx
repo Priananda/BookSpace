@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { loginUser, type LoginPayload } from '../../src/features/auth/authAPI';
-import { loginSuccess } from '../../src/features/auth/authSlice';
+import { loginUser, type LoginPayload } from '../../src/services/auth/authAPI';
+import { loginSuccess } from '../../src/stores/auth/authStore';
 import AuthButton from '../../src/components/AuthButton';
 import { setAuthToken } from '../../src/utils/cookie';
 import AllButton from '../../src/components/AllButton';

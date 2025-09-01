@@ -13,12 +13,17 @@ const AuthButton: React.FC<AuthButtonProps> = ({
   className = '',
   type = 'submit',
 }) => {
-  
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`w-full text-md mt-5 py-3 px-6 cursor-pointer rounded-full shadow-md text-white bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300 hover:scale-105 ${className}`}
+      style={{
+        WebkitBackfaceVisibility: 'hidden', // membantu iOS rendering
+        transform: 'translateZ(0)',
+      }}
+      className={`w-full text-md mt-5 py-3 px-6 cursor-pointer rounded-full shadow-md text-white 
+        bg-gradient-to-r from-blue-500 to-indigo-600 transition duration-300 
+        hover:scale-105 focus:outline-none ${className}`}
     >
       {label}
     </button>

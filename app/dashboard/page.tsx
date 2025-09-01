@@ -1,4 +1,4 @@
-import { getBookList } from '../../src/features/books/booksAPI';
+import { getBookList } from '../../src/services/books/booksAPI';
 import BookListClient from './BookListClient';
 
 export default async function Dashboard() {

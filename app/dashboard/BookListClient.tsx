@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { logout as logoutAction } from '../../src/features/auth/authSlice';
+import { logout as logoutAction } from '../../src/stores/auth/authStore';
 import { clearAuthToken } from '../../src/utils/cookie';
 import { getAuthToken } from '../../src/utils/cookie';
 import AllButton from '../../src/components/AllButton';
